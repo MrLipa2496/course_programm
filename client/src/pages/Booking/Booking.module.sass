@@ -1,0 +1,140 @@
+$text-color: #a23acf
+$btn-color: #7502a6
+
+.confirmationWrapper
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  height: 100vh
+  text-align: center
+
+.confirmationIcon
+  display: flex
+  justify-content: center
+  align-items: center
+  font-size: 48px
+  color: white
+  background-color: $text-color
+  border-radius: 50%
+  margin-bottom: 20px
+  width: 80px
+  height: 80px
+
+.motivationPhrase
+  font-size: 20px
+  color: #333
+  margin: 20px 0
+
+.confirmationMessage
+  font-size: 18px
+  color: #555
+  margin-bottom: 20px
+
+.homeButton
+  font-size: 16px
+  color: #fff
+  text-decoration: none
+  background-color: $btn-color
+  padding: 20px 50px
+  border: none
+  border-radius: 100px
+  text-decoration: none
+  cursor: pointer
+  transition: background-color 0.3s
+
+.homeButton:hover
+  background-color: lighten($btn-color, 10%)
+
+.homeLink
+    text-decoration: none
+    color: white
+
+.bookingWraper
+    display: flex
+    flex-direction: column
+    justify-content: space-around
+    min-height: 150px
+    align-items: center
+    flex-wrap: wrap
+    gap: 10px
+    border-radius: 1.25rem
+    box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.2)
+    margin: 20px
+    padding: 10px
+    cursor: pointer
+    transition: transform 0.3s
+    line-height: 1.5
+
+    &:hover
+        transform: scale(1.009)
+
+.infoWrapper
+    display: flex    
+    justify-content: space-around
+    align-items: center
+    width: 100%
+    gap: 10px
+
+.title
+    font-size: 20px
+    font-weight: 800
+    color: $text-color
+    padding: 10px 0
+
+.price
+    font-weight: 600
+    color: red
+
+.deleteBtn
+    background-color: inherit
+    border: none
+    font-size: 25px
+    color: $btn-color
+    cursor: pointer
+
+
+.registrationForm
+    margin-top: 20px
+    padding: 15px
+    border: 1px solid rgba(0, 0, 0, 0.2)
+    background-color: #f9f9f9
+    border-radius: 8px
+    max-width: 500px
+    width: 100%
+
+.formGroup
+    margin-bottom: 15px
+
+label
+    display: block
+    font-weight: bold
+    margin-bottom: 5px
+
+input
+    width: 100%
+    padding: 8px
+    border: 1px solid #ccc
+    border-radius: 4px
+    font-size: 14px
+
+.error
+    color: red
+    font-size: 12px
+    margin-top: 5px
+
+.submitButton
+    display: block
+    width: 100%
+    padding: 10px
+    background-color: $btn-color
+    color: white
+    border: none
+    border-radius: 4px
+    font-size: 16px
+    font-weight: bold
+    cursor: pointer
+    text-align: center
+
+    &:hover
+        background-color: darken($btn-color, 10%)
