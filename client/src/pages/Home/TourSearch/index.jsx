@@ -12,7 +12,6 @@ const TourSearch = () => {
     endDate: '',
     budget: '',
     transport: '',
-    hotelClass: '',
   };
 
   const handleSubmit = (values, { resetForm }) => {
@@ -75,20 +74,6 @@ const TourSearch = () => {
                 placeholder='Enter budget'
                 className={styles.tourFilterInput}
               />
-            </label>
-
-            <label className={styles.tourFilterLabel}>
-              <span className={styles.tourFilterSpan}>Hotel Class</span>
-              <ValidatedField
-                name='hotelClass'
-                as='select'
-                className={styles.tourFilterSelect}
-              >
-                <option value=''>Select hotel class</option>
-                <option value='3-star'>3-Star</option>
-                <option value='4-star'>4-Star</option>
-                <option value='5-star'>5-Star</option>
-              </ValidatedField>
             </label>
 
             <button className={styles.tourFilterButton} type='submit'>
