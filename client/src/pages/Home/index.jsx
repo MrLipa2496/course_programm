@@ -20,7 +20,7 @@ function Home () {
           <p className={styles.bookingLink}>
             Start your journey today!
             <NavLink className={styles.link} to='/booking'>
-              Booking
+              Search
             </NavLink>
           </p>
         </div>
