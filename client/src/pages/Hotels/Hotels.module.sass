@@ -1,0 +1,167 @@
+$main-color: #a9a1ff
+$hover-color: #be64ff
+$card-bg-color: rgba(183, 140, 252, 0.6)
+
+.hotelsWrapper
+  display: flex
+  flex-direction: column
+  align-items: center
+  margin-top: 50px
+
+.headerWrapper
+  flex-direction: column
+  max-width: 850px
+  width: 100%
+  text-align: center
+  margin: 100px auto 50px
+
+.hotelsTitle
+  font-size: 60px
+  line-height: 1.5
+  font-weight: 1000
+  text-align: center
+  margin-bottom: 50px
+  color: $main-color
+
+.hotelsSubTitle
+  font-size: 18px
+  line-height: 1.3
+  background: $main-color
+  color: white
+  padding: 20px
+  border-radius: 20px
+  box-shadow: 0px 8px 25px rgb(183, 130, 236)
+
+.searchInputWrapper
+  text-align: center
+  margin-bottom: 50px
+
+.searchInput
+  margin: 50px auto
+  max-width: 800px
+  border-radius: 50px
+  border: 1px solid gray
+  width: 100%
+  padding: 10px
+
+.hotelCards
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
+  gap: 1.5rem
+
+.cardWrapper
+  display: flex
+  flex-direction: column
+  align-items: center
+  border-radius: 8px
+  background-color: $card-bg-color
+  overflow: hidden
+  max-width: 20%
+  min-width: 400px
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2)
+  position: relative
+  transition: transform 0.3s ease, box-shadow 0.3s ease
+  min-height: 450px
+  margin-bottom: 50px
+
+  &:hover
+    transform: scale(1.05)
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2)
+
+  &:hover .hotelCategory
+    opacity: 1
+
+.hotelImg
+  width: 100%
+  min-height: 300px
+  object-fit: cover
+
+.infoWrapper
+  display: flex
+  flex-direction: column
+  align-items: center
+  padding: 10px
+  flex-grow: 1
+  justify-content: space-between
+  text-align: center
+
+.hotelName
+  margin: 20px 0
+  font-size: 26px
+  font-weight: 800
+  color: #fdfdfd
+
+.hotelAddress
+  font-size: 16px
+  color: #ffffff
+  margin-bottom: 1rem
+
+.hotelCategory
+  position: absolute
+  top: 10px
+  right: 10px
+  font-weight: bold
+  font-size: 16px
+  background-color: rgba(183, 100, 255, 0.479)
+  color: white
+  padding: 10px 20px
+  border-radius: 5px
+  opacity: 0
+  transition: opacity 0.3s ease-in-out
+
+.price
+  position: absolute
+  top: 10px
+  right: 10px
+  font-weight: bold
+  font-size: 16px
+  background-color: red
+  padding: 10px
+  color: white
+  opacity: 0
+  transition: opacity 0.3s ease-in-out
+
+.hotelStars
+  font-size: 16px
+  font-weight: bold
+  color: #ffffff
+  margin-bottom: 10px
+
+.detailsBtn
+  margin-top: auto
+  padding: 12px 20px
+  font-size: 16px
+  background-color: $hover-color
+  color: #fff
+  border: none
+  border-radius: 4px
+  cursor: pointer
+  transition: background-color 0.3s linear
+
+  &:hover
+    background-color: darken($hover-color, 10%)
+
+.moreBtnContainer
+  display: flex
+  justify-content: center
+  margin-bottom: 40px
+
+.showMoreBtn
+  font-size: 16px
+  padding: 20px 40px
+  border-radius: 20px
+  border: none
+  cursor: pointer
+  background: $main-color
+  color: white
+  transition: 0.3s linear
+
+  &:hover
+    box-shadow: 2px 3px 10px rgb(105, 183, 255)
+
+.noMoreHotels
+  font-size: 18px
+  color: #999
+  text-align: center
+  margin-top: 20px
