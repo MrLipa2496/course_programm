@@ -1,0 +1,5 @@
+### 200
+GET http://localhost:5001/api/tours/1
+
+### 404
+GET http://localhost:5001/api/tours/7

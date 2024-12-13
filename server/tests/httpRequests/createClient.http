@@ -1,0 +1,10 @@
+POST http://localhost:5001/api/clients
+Content-Type: application/json
+
+{
+  "CL_FirstName": "John",
+  "CL_LastName": "Doe",
+  "CL_DateOfBirth": "1990-01-01",
+  "CL_Phone": "1234567890",
+  "CL_Email": "john.doe@example.com"
+}

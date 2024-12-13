@@ -1,0 +1,3 @@
+### 204
+DELETE http://localhost:5001/api/tours/5
+

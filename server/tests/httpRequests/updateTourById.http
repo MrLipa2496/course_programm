@@ -1,0 +1,27 @@
+### 200 
+PATCH http://localhost:5001/api/tours/5
+Content-Type: application/json
+
+{
+    "TR_Name": "Updated Test Tour1"
+}
+
+
+### 404 
+PATCH http://localhost:5001/api/tours/10
+Content-Type: application/json
+
+{
+    "TR_Name": "Grand Adventure Updated"
+}
+
+### 422 
+PATCH http://localhost:5001/api/tours/5
+Content-Type: application/json
+
+{
+    "TR_TourType": "Cool"
+}
+
+
+

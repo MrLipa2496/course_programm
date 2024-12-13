@@ -1,0 +1,43 @@
+### 201 {users} 
+POST http://localhost:5001/api/tours
+Content-Type: application/json
+
+{
+    "TR_Name": "Test Tour1",
+    "TR_Description": "Test Test Test Test Test TestTest Test Test",
+    "TR_Price": 1250,
+    "TR_StartDate": "2024-11-01",
+    "TR_EndDate": "2024-11-11",
+    "TR_TourType": "Leisure",
+    "TR_Destination": "Test"
+}
+
+### 422 []
+POST http://localhost:5001/api/tours
+Content-Type: application/json
+
+{
+    "TR_Name": "Test Tour1",
+    "TR_Description": "Test Test Test Test Test TestTest Test Test",
+    "TR_Price": 1250,
+    "TR_StartDate": "2024-11-01",
+    "TR_EndDate": "2024-11-11",
+    "TR_TourType": "Leisure",
+    "TR_Destination": "Test"
+}
+
+### 422 {users} 
+POST http://localhost:5001/api/tours
+Content-Type: application/json
+
+{
+    "TR_Name": "G",
+    "TR_Description": "A quick getaway.",
+    "TR_Price": -50,
+    "TR_StartDate": "2025-12-01",
+    "TR_EndDate": "2025-11-30",
+    "TR_TourType": "Holiday",
+    "TR_Destination": "Paris"
+}
+
+
