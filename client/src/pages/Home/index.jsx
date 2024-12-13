@@ -19,7 +19,7 @@ function Home () {
           </p>
           <p className={styles.bookingLink}>
             Start your journey today!
-            <NavLink className={styles.link} to='/booking'>
+            <NavLink className={styles.link} to='/tours'>
               Search
             </NavLink>
           </p>
