@@ -26,19 +26,49 @@ $main-color: #a9a1ff
   padding: 20px
   border-radius: 20px
   box-shadow: 0px 8px 25px rgb(183, 130, 236) 
+  margin-bottom: 80px
 
 .searchInputWrapper
+  display: flex
+  flex-direction: column
+  align-items: center
+  margin: 0 auto
+  align-self: center
   text-align: center
-  margin-bottom: 50px
+  max-width: 800px
 
 .searchInput
-  margin: 50px auto
-  max-width: 800px
+  margin: 0 auto
   border-radius: 50px
   border: 1px solid gray
   width: 100%
   padding: 10px
-  
+
+.filtersWrapper 
+  display: flex
+  flex-wrap: wrap
+  word-break: break-all
+  margin: 10px 0 40px 0
+
+.filterTag 
+  background-color: #e0e0e0
+  margin: 5px
+  padding: 5px 10px
+  border-radius: 15px
+  display: flex
+  align-items: center
+
+.filterLabel 
+  margin-right: 5px
+
+.removeFilterBtn 
+  background: none
+  border: none
+  cursor: pointer
+  font-weight: bold
+  color: red
+
+
 
 .tourCards
   display: flex

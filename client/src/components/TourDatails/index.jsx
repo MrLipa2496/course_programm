@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, useParams, useNavigate } from 'react-router-dom';
 import { getTourDetails } from '../../api';
+import defImg from './../../../img/in-process-img.png';
 import styles from './TourDetails.module.sass';
 
 function TourDetails () {
@@ -70,7 +71,11 @@ function TourDetails () {
       <div className={styles.mainInfoContainer}>
         <div className={styles.imageContainer}>
           <img
-            src={`http://localhost:5001/images/${tour.TR_Img}`}
+            src={
+              tour.TR_Img
+                ? `http://localhost:5001/images/${tour.TR_Img}`
+                : defImg
+            }
             alt={tour.TR_Name}
             className={styles.image}
             onClick={handleImageClick}
@@ -98,7 +103,11 @@ function TourDetails () {
             onClick={e => e.stopPropagation()}
           >
             <img
-              src={`http://localhost:5001/images/${tour.TR_Img}`}
+              src={
+                tour.TR_Img
+                  ? `http://localhost:5001/images/${tour.TR_Img}`
+                  : defImg
+              }
               alt={tour.TR_Name}
               className={styles.modalImage}
             />

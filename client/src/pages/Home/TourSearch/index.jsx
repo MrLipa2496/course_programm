@@ -3,6 +3,7 @@ import { Formik, Form, Field } from 'formik';
 import { TOUR_SEARCH_FORM_VALIDATION } from '../../../utils/validationSchema';
 import ValidatedField from '../../../components/ValidatedField';
 import styles from './TourSearch.module.sass';
+import { useNavigate } from 'react-router-dom';
 
 const TourSearch = () => {
   const initialValues = {
@@ -11,11 +12,18 @@ const TourSearch = () => {
     startDate: '',
     endDate: '',
     budget: '',
-    transport: '',
   };
+
+  const navigate = useNavigate();
 
   const handleSubmit = (values, { resetForm }) => {
     resetForm();
+
+    navigate('/tours', {
+      state: {
+        filters: values,
+      },
+    });
   };
 
   return (
@@ -41,10 +49,10 @@ const TourSearch = () => {
               <span className={styles.tourFilterSpan}>Tour Type</span>
               <ValidatedField name='tourType' as='select'>
                 <option value=''>Select a tour type</option>
-                <option value='leisure'>Leisure</option>
-                <option value='excursion'>Excursion</option>
-                <option value='adventure'>Adventure trip</option>
-                <option value='business'>Business trip</option>
+                <option value='Leisure'>Leisure</option>
+                <option value='Excursion'>Excursion</option>
+                <option value='Adventure'>Adventure trip</option>
+                <option value='Business'>Business trip</option>
               </ValidatedField>
             </label>
 

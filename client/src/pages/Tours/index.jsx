@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import BeatLoader from 'react-spinners/BeatLoader';
 import { connect } from 'react-redux';
 import { getToursThunk } from './../../store/slices/toursSlice';
@@ -7,12 +7,14 @@ import styles from './Tours.module.sass';
 import defImg from './../../../img/in-process-img.png';
 
 function Tours ({ tours, totalTours, isFetching, error, getTours }) {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [filters, setFilters] = useState(location.state?.filters || {});
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredTours, setFilteredTours] = useState([]);
   const [displayTours, setDisplayTours] = useState([]);
   const [page, setPage] = useState(1);
   const [limit] = useState(10);
-  const navigate = useNavigate();
 
   useEffect(() => {
     getTours({ page, limit });
@@ -20,11 +22,25 @@ function Tours ({ tours, totalTours, isFetching, error, getTours }) {
 
   useEffect(() => {
     setFilteredTours(
-      tours.filter(tour =>
-        tour.TR_Name.toLowerCase().includes(searchTerm.toLowerCase())
-      )
+      tours.filter(tour => {
+        return (
+          (filters.destination
+            ? tour.TR_Destination.toLowerCase().includes(
+                filters.destination.toLowerCase()
+              )
+            : true) &&
+          (filters.tourType ? tour.TR_TourType === filters.tourType : true) &&
+          (filters.startDate
+            ? new Date(tour.TR_StartDate) >= new Date(filters.startDate)
+            : true) &&
+          (filters.endDate
+            ? new Date(tour.TR_EndDate) <= new Date(filters.endDate)
+            : true) &&
+          (filters.budget ? tour.TR_Price <= filters.budget : true)
+        );
+      })
     );
-  }, [searchTerm, tours]);
+  }, [filters, tours]);
 
   useEffect(() => {
     setDisplayTours(prevDisplayTours => {
@@ -40,6 +56,12 @@ function Tours ({ tours, totalTours, isFetching, error, getTours }) {
     setPage(prevPage => prevPage + 1);
   };
 
+  const handleRemoveFilter = filterKey => {
+    const newFilters = { ...filters };
+    delete newFilters[filterKey];
+    setFilters(newFilters);
+  };
+
   return (
     <>
       <div className={styles.headerWrapper}>
@@ -50,6 +72,7 @@ function Tours ({ tours, totalTours, isFetching, error, getTours }) {
           Your next adventure is already waiting for you!
         </p>
       </div>
+
       <div className={styles.searchInputWrapper}>
         <input
           type='text'
@@ -58,7 +81,27 @@ function Tours ({ tours, totalTours, isFetching, error, getTours }) {
           onChange={e => setSearchTerm(e.target.value)}
           className={styles.searchInput}
         />
+        <div className={styles.filtersWrapper}>
+          {Object.keys(filters).map(
+            key =>
+              filters[key] &&
+              key !== 'searchTerm' && (
+                <div key={key} className={styles.filterTag}>
+                  <span className={styles.filterLabel}>
+                    {key}: {filters[key]}
+                  </span>
+                  <button
+                    className={styles.removeFilterBtn}
+                    onClick={() => handleRemoveFilter(key)}
+                  >
+                    X
+                  </button>
+                </div>
+              )
+          )}
+        </div>
       </div>
+
       <div className={styles.toursWrapper}>
         {isFetching && <BeatLoader loading={isFetching} />}
         {error && <div>{error.message || '!!!ERROR!!!'}</div>}
@@ -83,7 +126,7 @@ function Tours ({ tours, totalTours, isFetching, error, getTours }) {
                 <p className={styles.price}>{`from $${tour.TR_Price}`}</p>
                 <button
                   className={styles.detailsBtn}
-                  onClick={() => navigate(`/tours/${tour.TR_ID}`)} // Навігація до сторінки деталей
+                  onClick={() => navigate(`/tours/${tour.TR_ID}`)}
                 >
                   View Details
                 </button>
@@ -92,13 +135,16 @@ function Tours ({ tours, totalTours, isFetching, error, getTours }) {
           ))}
         </div>
       </div>
-      {displayTours.length < filteredTours.length && (
-        <div className={styles.moreBtnContainer}>
-          <button onClick={handleShowMore} className={styles.showMoreBtn}>
-            Show more
-          </button>
-        </div>
-      )}
+
+      {displayTours.length < filteredTours.length &&
+        displayTours.length < totalTours && (
+          <div className={styles.moreBtnContainer}>
+            <button onClick={handleShowMore} className={styles.showMoreBtn}>
+              Show more
+            </button>
+          </div>
+        )}
+
       {displayTours.length >= totalTours && (
         <p className={styles.noMoreTours}>No more tours to load.</p>
       )}
