@@ -1,0 +1,72 @@
+.container
+  position: relative
+  overflow: hidden
+
+.homeBg
+  width: 100%
+  height: 100vh 
+  object-fit: cover
+  object-position: center
+  display: block
+
+.titleWrapper
+  position: absolute
+  top: 0
+  left: 0
+  height: 100% 
+  width: 100%
+  display: flex
+  flex-direction: column
+  justify-content: center
+  text-align: center
+  background: linear-gradient(to bottom right,rgba(149, 140, 252, 0.7) 100%, rgba(0, 204, 255, 0.7) 20%)
+  color: white
+
+.homeTitle
+  font-size: 65px
+  font-weight: 800
+  margin-bottom: 20px
+  padding: 10px
+
+  @media screen and (max-width:700px) 
+    font-size: 45px
+
+.subTitle
+  font-size: 24px
+  margin: 20px 10px 50px 10px
+
+  @media screen and (max-width:700px) 
+    font-size: 18px
+
+.bookingLink
+  position: relative
+  font-size: 18px
+  padding: 16px
+  color: #8ca5f7 
+  background-color: #f1f1f1 
+  max-width: 600px
+  width: 100%
+  margin: 0 auto
+  border-radius: 30px
+
+  @media screen and (max-width:700px) 
+    padding: 12px
+      
+.link
+  font-weight: 600
+  text-decoration: none
+  background-color: #8ca5f7 
+  color: #f1f1f1 
+  position: absolute
+  right: 0
+  top: 0
+  padding: 16px 40px
+  border-radius: 30px
+  transition: 0.6s 
+
+
+  &:hover
+    background-color: #7290f3 
+  
+  @media screen and (max-width:700px) 
+    padding: 12px 30px
