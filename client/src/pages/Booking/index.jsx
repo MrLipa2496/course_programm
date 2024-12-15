@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { ImCheckmark } from 'react-icons/im';
 import { Formik, Form } from 'formik';
@@ -16,7 +16,16 @@ function Booking () {
   const tour = location.state?.tour;
 
   if (!tour) {
-    return <div>No tour selected</div>;
+    return (
+      <>
+        <div className={styles.container}>
+          <div className={styles.noTourSelected}>No tour selected</div>
+          <Link className={styles.toursLink} to='/tours'>
+            Select tour
+          </Link>
+        </div>
+      </>
+    );
   }
 
   const handleWrapperClick = () => {
