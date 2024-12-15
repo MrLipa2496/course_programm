@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import BeatLoader from 'react-spinners/BeatLoader';
+import ReactPaginate from 'react-paginate';
 import { connect } from 'react-redux';
 import { getToursThunk } from './../../store/slices/toursSlice';
 import styles from './Tours.module.sass';
@@ -12,15 +13,15 @@ function Tours ({ tours, totalTours, isFetching, error, getTours }) {
   const [filters, setFilters] = useState(location.state?.filters || {});
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredTours, setFilteredTours] = useState([]);
-  const [displayTours, setDisplayTours] = useState([]);
   const [page, setPage] = useState(1);
   const [limit] = useState(10);
 
   useEffect(() => {
-    getTours({ page, limit });
-  }, [getTours, page, limit]);
+    getTours({ page, limit, searchTerm, filters });
+  }, [getTours, page, limit, searchTerm, filters]);
 
   useEffect(() => {
+    const regex = new RegExp(searchTerm, 'i');
     setFilteredTours(
       tours.filter(tour => {
         return (
@@ -36,24 +37,15 @@ function Tours ({ tours, totalTours, isFetching, error, getTours }) {
           (filters.endDate
             ? new Date(tour.TR_EndDate) <= new Date(filters.endDate)
             : true) &&
-          (filters.budget ? tour.TR_Price <= filters.budget : true)
+          (filters.budget ? tour.TR_Price <= filters.budget : true) &&
+          (searchTerm ? regex.test(tour.TR_Name) : true)
         );
       })
     );
-  }, [filters, tours]);
+  }, [filters, tours, searchTerm]);
 
-  useEffect(() => {
-    setDisplayTours(prevDisplayTours => {
-      const uniqueTours = filteredTours.filter(
-        tour =>
-          !prevDisplayTours.some(dispTour => dispTour.TR_ID === tour.TR_ID)
-      );
-      return [...prevDisplayTours, ...uniqueTours];
-    });
-  }, [filteredTours]);
-
-  const handleShowMore = () => {
-    setPage(prevPage => prevPage + 1);
+  const handlePageChange = ({ selected }) => {
+    setPage(selected + 1);
   };
 
   const handleRemoveFilter = filterKey => {
@@ -105,9 +97,11 @@ function Tours ({ tours, totalTours, isFetching, error, getTours }) {
       <div className={styles.toursWrapper}>
         {isFetching && <BeatLoader loading={isFetching} />}
         {error && <div>{error.message || '!!!ERROR!!!'}</div>}
-        {displayTours.length === 0 && !isFetching && <p>No tours available.</p>}
+        {filteredTours.length === 0 && !isFetching && (
+          <p className={styles.noToursAvailable}>No tours available.</p>
+        )}
         <div className={styles.tourCards}>
-          {displayTours.map(tour => (
+          {filteredTours.map(tour => (
             <div key={tour.TR_ID} className={styles.cardWrapper}>
               <img
                 className={styles.tourImg}
@@ -136,18 +130,22 @@ function Tours ({ tours, totalTours, isFetching, error, getTours }) {
         </div>
       </div>
 
-      {displayTours.length < filteredTours.length &&
-        displayTours.length < totalTours && (
-          <div className={styles.moreBtnContainer}>
-            <button onClick={handleShowMore} className={styles.showMoreBtn}>
-              Show more
-            </button>
-          </div>
-        )}
-
-      {displayTours.length >= totalTours && (
-        <p className={styles.noMoreTours}>No more tours to load.</p>
-      )}
+      <ReactPaginate
+        className={styles.toursPaginate}
+        previousLabel={'<'}
+        nextLabel={'>'}
+        breakLabel={'...'}
+        pageCount={Math.ceil(totalTours / limit)}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={3}
+        onPageChange={handlePageChange}
+        containerClassName={styles.pagination}
+        pageClassName={styles.pageItem}
+        previousClassName={styles.previousBtn}
+        nextClassName={styles.nextBtn}
+        activeClassName={styles.activePage}
+        breakClassName={styles.breakBtn}
+      />
     </>
   );
 }

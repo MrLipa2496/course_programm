@@ -54,7 +54,7 @@ const ToursSlice = createSlice({
     });
     builder.addCase(getToursThunk.fulfilled, (state, action) => {
       state.isFetching = false;
-      state.tours = [...state.tours, ...action.payload.tours];
+      state.tours = [...action.payload.tours];
       state.totalTours = action.payload.totalTours;
     });
     builder.addCase(getToursThunk.rejected, (state, { payload }) => {
