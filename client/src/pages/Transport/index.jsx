@@ -75,7 +75,6 @@ function Transport () {
                 className={styles.contact}
               >{`Phone: ${transport.TRP_Phone}`}</p>
               <p className={styles.email}>{`Email: ${transport.TRP_Email}`}</p>
-              <button className={styles.detailsBtn}>View Details</button>
             </div>
           </div>
         ))}

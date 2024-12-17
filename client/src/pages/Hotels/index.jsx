@@ -47,15 +47,6 @@ function Hotels ({ hotels, totalHotels, isFetching, error, getHotels }) {
           Find the perfect place for your stay
         </p>
       </div>
-      <div className={styles.searchInputWrapper}>
-        <input
-          type='text'
-          placeholder='Search hotels...'
-          value={searchTerm}
-          onChange={e => setSearchTerm(e.target.value)}
-          className={styles.searchInput}
-        />
-      </div>
       <div className={styles.hotelsWrapper}>
         {isFetching && <BeatLoader loading={isFetching} />}
         {error && <div>{error.message || '!!!ERROR!!!'}</div>}
@@ -77,11 +68,12 @@ function Hotels ({ hotels, totalHotels, isFetching, error, getHotels }) {
               <div className={styles.infoWrapper}>
                 <h3 className={styles.hotelName}>{hotel.HT_Name}</h3>
                 <p className={styles.hotelAddress}>{hotel.HT_Address}</p>
+                <p className={styles.hotelAddress}>{hotel.HT_Email}</p>
+                <p className={styles.hotelAddress}>{hotel.HT_Phone}</p>
                 <p className={styles.hotelCategory}>{hotel.HT_Category}</p>
                 <p className={styles.hotelStars}>
                   {`Stars: ${hotel.HT_Stars}`}
                 </p>
-                <button className={styles.detailsBtn}>View Details</button>
               </div>
             </div>
           ))}
